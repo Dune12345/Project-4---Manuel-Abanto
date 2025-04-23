@@ -59,10 +59,10 @@ public class RevesActionThread extends ActionThread
 
         //Step 3 of the Lab 
 
-        a = new Pole("A");
-        b = new Pole("B");
-        c = new Pole("C");
-        d = new Pole("D");
+        a = new Pole("A", 0);
+        b = new Pole("B", 1);
+        c = new Pole("C", 2);
+        d = new Pole("D", 3);
 
         //Step 4, add code that adds disks and puts them on pole a
 
