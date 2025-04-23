@@ -101,6 +101,57 @@ public class RevesActionThread extends ActionThread
 
     
     // ADD METHODS HERE
+
+            //Step 8, tower of hanoi from exercises
+    public void towersOfHanoi(int n, Pole from, Pole to, Pole extra){
+        if (n==0){
+            return;
+        }
+        //1st: moving n-1 disks from "from" to "extra"
+        towersOfHanoi(n-1, from, to, extra);
+        //2nd: moving the largest disk from "from" to "to"
+        moveDisk(from,to);
+        //3rd: move n-1 disks from "extra" to "to"
+        towersOfHanoi(n-1, extra, to, from);
+
+    }
+
+    //Step 10
+
+    private int computeK(int n){
+        int k = 1;
+        while ((k * (k + 1))/ 2 < n){
+            k++;
+        }
+        return k;
+    }
+
+    //Step 11
+
+    public void reves(int n, Pole from, Pole to, Pole extra1, Pole extra2){
+        if(n == 0) return;
+        if(n == 1){
+            moveDisk(from,to);
+            return;
+        }
+
+        int k = computeK(n);
+        System.out.println("DEBUG: n = " + n + ", k = " + k);
+
+        //
+        if (k >= n){
+            towersOfHanoi(n, from, to, extra1);
+            return;
+        }
+
+        //1st
+        reves(k, from, extra1, extra2, to);
+        //2nd
+        towersOfHanoi(n - k, extra1, to, extra2);
+        //3rd
+        reves(k, extra1, to, from, extra2);
+    }
+    
     
     /***************************************************************************
      * *************************************************************************
