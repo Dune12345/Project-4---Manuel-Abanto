@@ -57,6 +57,13 @@ public class RevesActionThread extends ActionThread
 
         // ADD INITIALIZATION CODE HERE
 
+        //Step 3 of the Lab 
+
+        a = new Pole("A");
+        b = new Pole("B");
+        c = new Pole("C");
+        d = new Pole("D");
+
     }
         
 
