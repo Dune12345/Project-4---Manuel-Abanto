@@ -64,6 +64,12 @@ public class RevesActionThread extends ActionThread
         c = new Pole("C");
         d = new Pole("D");
 
+        //Step 4, add code that adds disks and puts them on pole a
+
+        for (int i = 0; i < disks; i++){
+            Disk disk = new Disk (i);
+            a.addDisk(disk);
+
     }
         
 
