@@ -66,9 +66,11 @@ public class RevesActionThread extends ActionThread
 
         //Step 4, add code that adds disks and puts them on pole a
 
-        for (int i = 0; i < disks; i++){
-            Disk disk = new Disk (i);
+        for (int i = disks - 1; i >= 0; i--){
+            Disk disk = new Disk(i);
             a.addDisk(disk);
+            //Note: I made a mistake here and it cost me 5 hours... ngl this had me stressing
+        }
 
     }
         
@@ -76,6 +78,19 @@ public class RevesActionThread extends ActionThread
     public void executeApplication()
     {
         // ADD CODE THAT WILL DO A SINGLE EXECUTION
+
+         //Step 7
+
+        // ADD CODE THAT WILL DO A SINGLE EXECUTION
+        //moveDisk(a,b);
+
+        //Step 8
+
+        //towersOfHanoi(disks, a, d, b);
+
+        //Step 12
+
+        reves(disks, a, d, b, c);
     }
 
     /**
@@ -86,10 +101,20 @@ public class RevesActionThread extends ActionThread
      */
     public void moveDisk(Pole from, Pole to)
     {
-        Disk toMove = null;
+        //Step 6
+        Disk toMove = from.removeDisk();
+
+        //Step 9 double checking if correct since error given
+        if (toMove == null){
+            System.out.println("Tried to move from an empty pole: " + from.getName());
+            return;
+        }
         
         // ADD CODE HERE TO MOVE A DISK FROM ONE POLE TO THE OTHER
+        //Step 6
+        to.addDisk(toMove);
 
+        //this code was already here
         movesMade++;
         moveString = "Move #" + movesMade 
                         + ": Moved disk " + toMove.getSize() 
@@ -102,53 +127,40 @@ public class RevesActionThread extends ActionThread
     
     // ADD METHODS HERE
 
-            //Step 8, tower of hanoi from exercises
-    public void towersOfHanoi(int n, Pole from, Pole to, Pole extra){
-        if (n==0){
-            return;
-        }
-        //1st: moving n-1 disks from "from" to "extra"
-        towersOfHanoi(n-1, from, to, extra);
-        //2nd: moving the largest disk from "from" to "to"
-        moveDisk(from,to);
-        //3rd: move n-1 disks from "extra" to "to"
-        towersOfHanoi(n-1, extra, to, from);
+    //Step 8, tower of hanoi from exercises
+    public void towersOfHanoi(int n, Pole from, Pole to, Pole extra) {
+        if (n == 0) return;
 
+        towersOfHanoi(n - 1, from, extra, to);
+        moveDisk(from, to);
+        towersOfHanoi(n - 1, extra, to, from);
     }
 
     //Step 10
 
-    private int computeK(int n){
+    private int computeK(int n) {
         int k = 1;
-        while ((k * (k + 1))/ 2 < n){
+        while ((k * (k + 1)) / 2 < n) {
             k++;
         }
-        return k;
+        return k - 1; // Guarantee k < n
     }
+    //changed logic after 8 retries on main code, since I messed up the logic earlier steps.
 
     //Step 11
 
     public void reves(int n, Pole from, Pole to, Pole extra1, Pole extra2){
-        if(n == 0) return;
-        if(n == 1){
-            moveDisk(from,to);
+    if (n == 0) return;
+
+        if (n == 1) {
+            moveDisk(from, to);
             return;
         }
 
-        int k = computeK(n);
-        System.out.println("DEBUG: n = " + n + ", k = " + k);
+        int k = computeK(n);  // This will always return k < n
 
-        //
-        if (k >= n){
-            towersOfHanoi(n, from, to, extra1);
-            return;
-        }
-
-        //1st
         reves(k, from, extra1, extra2, to);
-        //2nd
-        towersOfHanoi(n - k, extra1, to, extra2);
-        //3rd
+        towersOfHanoi(n - k, from, to, extra2);
         reves(k, extra1, to, from, extra2);
     }
     
