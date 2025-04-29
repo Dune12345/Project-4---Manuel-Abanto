@@ -163,7 +163,11 @@ public class RevesActionThread extends ActionThread
         towersOfHanoi(n - k, from, to, extra2);
         reves(k, extra1, to, from, extra2);
     }
-    
+
+    //Ok so I finally ran in with a corrupted file, and it was just this one in my IDE, so I was panicking lol
+    //I am so glad that I had the back up here anyways, I haven't used too much so sorry for not commiting that much
+    //I kinda just wanted to rush as fast as possible throught this and ended up taking even longer...
+    //Well thank you for reading, and sorry for the mediocre code, I hope you have a good day prof
     
     /***************************************************************************
      * *************************************************************************
